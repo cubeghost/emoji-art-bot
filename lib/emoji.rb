@@ -30,4 +30,8 @@ class Emoji
 		@@current_list = list
 	end
 
+	def self.list
+		@@emoji.keys
+	end
+	
 end

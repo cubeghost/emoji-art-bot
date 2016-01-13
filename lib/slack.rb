@@ -7,9 +7,15 @@ module SlackBotManager
 
     def on_message(data)
       debug(data)
-      return if data['user'] == 'U0GRB03A7' # Bot user ID
+      return if data['user'] == ENV['BOT_USER_ID'] # Bot user ID
 
 			message = data['text'].downcase
+
+			if message.include? "emoji" and (message.include? "list" or message.include? "help")
+				list = "Usage: `emoji square [set]` \n Emoji sets: `" + Emoji.list.join("`, `") + "`"
+				send_message(list, channel: data['channel'])
+				return
+			end
 
       if message.include? "emoji" and message.include? "square"
 				# Set grid size
@@ -19,9 +25,9 @@ module SlackBotManager
         end
 				# Set emoji group
 				case
-				when message.include?("happy") || message.include?("funny") || message.include?("lol") || message.include?(":)")
+				when message.include?("positive") || message.include?("happy") || message.include?("funny") || message.include?("lol") || message.include?(":)")
 					group = "positive"
-				when message.include?("anger") || message.include?("sad") || message.include?("angry") || message.include?(":(")
+				when message.include?("negative") ||message.include?("anger") || message.include?("sad") || message.include?("angry") || message.include?(":(")
 					group = "negative"
 				when message.include?("weather") || message.include?("forecast")
 					group = "weather"
@@ -33,7 +39,7 @@ module SlackBotManager
 					group = "flags"
 				when message.include?("clock")
 					group = "clocks"
-				when message.include?("square") || message.include?("tile")
+				when message.include?("pattern") || message.include?("tile") || message.include?("squares")
 					group = "squares"
 				else
 					group = "all" # default

@@ -1,4 +1,7 @@
 # Initialize
+require 'dotenv'
+Dotenv.load
+
 require 'rubygems'
 require 'bundler/setup'
 

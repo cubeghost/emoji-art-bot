@@ -33,8 +33,10 @@ module SlackBotManager
 					group = "flags"
 				when message.include?("clock")
 					group = "clocks"
+				when message.include?("square") || message.include?("tile")
+					group = "squares"
 				else
-					group = "squares" # default
+					group = "all" # default
 				end
 				Emoji.choose(group)
 				# Send message

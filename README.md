@@ -17,6 +17,8 @@ examples:
 `emoji artist, make me art`  
 `make emoji art that's 10x10 and made of nature`
 
+![](http://i.imgur.com/d3Y0R1X.png)
+
 ## get started
 
 1. `touch .env`
@@ -34,3 +36,8 @@ for example, to add a set called "buildings" that is used when the user says "bu
 when message.include?("buildings") || message.include?("city")
 	group = "buildings"
 ```
+
+## todo
+- add an `emoji again` command to do the last command again
+
+![](http://i.imgur.com/oZIs3A4.png)

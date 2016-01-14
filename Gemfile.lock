@@ -51,6 +51,7 @@ DEPENDENCIES
   activesupport (= 4.2.5)
   dotenv
   faye-websocket (= 0.10.2)
+  json
   slack-bot-manager!
 
 BUNDLED WITH

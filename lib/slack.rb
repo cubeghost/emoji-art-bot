@@ -7,17 +7,16 @@ module SlackBotManager
 
     def on_message(data)
       debug(data)
-      return if data['user'] == ENV['BOT_USER_ID'] # Bot user ID
 
 			message = data['text'].downcase
 
 			if message.include? "emoji" and (message.include? "list" or message.include? "help")
-				list = "Usage: `emoji square [set]` \n Emoji sets: `" + Emoji.list.join("`, `") + "`"
+				list = "Usage: `emoji art [set] [size]` \n Emoji sets: `" + Emoji.list.join("`, `") + "`"
 				send_message(list, channel: data['channel'])
 				return
 			end
 
-      if message.include? "emoji" and message.include? "square"
+      if message.include? "emoji" and message.include? "art"
 				# Set grid size
         number = 4 # default
         if message =~ /\d/
@@ -33,14 +32,18 @@ module SlackBotManager
 					group = "weather"
 				when message.include?("nature") || message.include?("plants") || message.include?("flowers")
 					group = "nature"
+				when message.include?("animal") || message.include?("creature")
+					group = "animals"
 				when message.include?("moon")
 					group = "moon"
 				when message.include?("flag")
 					group = "flags"
 				when message.include?("clock")
 					group = "clocks"
-				when message.include?("pattern") || message.include?("tile") || message.include?("squares")
+				when message.include?("tile") || message.include?("squares")
 					group = "squares"
+				when message.include?("shapes") || message.include?("pattern")
+					group = "shapes"
 				else
 					group = "all" # default
 				end
